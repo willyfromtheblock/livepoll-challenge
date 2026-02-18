@@ -30,7 +30,7 @@ A live voting/poll application where users can create polls, share them via uniq
 ### Prerequisites
 
 - [Bun](https://bun.sh/) 1.0+
-- PostgreSQL database
+- PostgreSQL database (or Docker)
 
 ### Setup
 
@@ -42,28 +42,32 @@ cd livepoll-challenge
 bun install
 ```
 
-2. **Configure the database:**
+2. **Start PostgreSQL** (skip if you already have one running):
 
-Create a `.env` file from the example and set your PostgreSQL connection string:
+```bash
+docker compose up -d
+```
+
+3. **Configure the database:**
 
 ```bash
 cp .env.example .env
-# Edit .env with your actual database credentials
+# Edit .env with your database credentials (defaults match docker-compose.yml)
 ```
 
-3. **Generate the Prisma client:**
+4. **Generate the Prisma client:**
 
 ```bash
 bun run db:generate
 ```
 
-4. **Run database migrations:**
+5. **Run database migrations:**
 
 ```bash
 bun run db:migrate
 ```
 
-5. **Start the development server:**
+6. **Start the development server:**
 
 ```bash
 bun run dev
