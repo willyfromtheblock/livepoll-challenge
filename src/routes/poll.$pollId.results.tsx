@@ -2,15 +2,6 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Share2, Users } from "lucide-react";
 import { useEffect, useState } from "react";
-import {
-	Bar,
-	BarChart,
-	Cell,
-	ResponsiveContainer,
-	Tooltip,
-	XAxis,
-	YAxis,
-} from "recharts";
 import { getPollResults } from "../server/polls";
 
 const COLORS = ["#06b6d4", "#8b5cf6", "#f59e0b", "#10b981", "#f43f5e"];
@@ -35,7 +26,6 @@ function ResultsPage() {
 
 	const [copied, setCopied] = useState(false);
 	const [mounted, setMounted] = useState(false);
-
 	useEffect(() => {
 		setMounted(true);
 	}, []);
@@ -55,12 +45,6 @@ function ResultsPage() {
 			</div>
 		);
 	}
-
-	const chartData = results.options.map((option) => ({
-		name: option.text,
-		votes: option.votes,
-		id: option.id,
-	}));
 
 	const shareUrl = mounted ? `${window.location.origin}/poll/${pollId}` : "";
 
@@ -94,49 +78,6 @@ function ResultsPage() {
 							</div>
 						</div>
 					</div>
-
-					{results.totalVotes > 0 && mounted && (
-						<div className="mb-8 h-64">
-							<ResponsiveContainer width="100%" height="100%">
-								<BarChart
-									data={chartData}
-									layout="vertical"
-									margin={{ top: 0, right: 40, left: 0, bottom: 0 }}
-								>
-									<XAxis type="number" hide />
-									<YAxis
-										type="category"
-										dataKey="name"
-										width={120}
-										tick={{ fill: "#d1d5db", fontSize: 14 }}
-										axisLine={false}
-										tickLine={false}
-									/>
-									<Tooltip
-										contentStyle={{
-											backgroundColor: "#0f172a",
-											border: "1px solid #334155",
-											borderRadius: "8px",
-										}}
-										labelStyle={{ color: "#f1f5f9", fontWeight: 600 }}
-										itemStyle={{ color: "#94a3b8" }}
-										formatter={(value) => [
-											`${value} ${value === 1 ? "vote" : "votes"}`,
-										]}
-										cursor={{ fill: "rgba(255, 255, 255, 0.05)" }}
-									/>
-									<Bar dataKey="votes" radius={[0, 6, 6, 0]} barSize={32}>
-										{chartData.map((entry, index) => (
-											<Cell
-												key={entry.id}
-												fill={COLORS[index % COLORS.length]}
-											/>
-										))}
-									</Bar>
-								</BarChart>
-							</ResponsiveContainer>
-						</div>
-					)}
 
 					<div className="space-y-4">
 						{results.options.map((option, index) => (
