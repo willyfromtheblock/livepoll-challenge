@@ -5,7 +5,7 @@
 - **Quote style**: Double quotes (JavaScript/TypeScript)
 - **Organize imports**: Enabled (auto)
 - **Scope**: Only `src/`, `.vscode/`, `index.html`, `vite.config.ts`
-- **Excluded**: `src/routeTree.gen.ts`, `src/styles.css`
+- **Excluded**: `src/routeTree.gen.ts`, `src/styles.css`, `src/generated/**/*`
 
 ## TypeScript
 - **Strict mode**: Enabled
@@ -17,8 +17,10 @@
 ## React / Component Patterns
 - Function components with `export default` for standalone components
 - Route components use `createFileRoute` / `createRootRouteWithContext`
-- Tailwind CSS utility classes for styling (v4, no config file needed)
+- Tailwind CSS v4 utility classes (use `bg-linear-to-b` not `bg-gradient-to-b`)
 - Icons from `lucide-react`
+- React 19: use `SubmitEvent<HTMLFormElement>` (not deprecated `FormEvent`)
+- SSR-sensitive code gated behind `mounted` state pattern for localStorage/window access
 
 ## Naming
 - PascalCase for components and types
@@ -27,4 +29,4 @@
 
 ## Module System
 - ESM (`"type": "module"` in package.json)
-- Path alias `@/*` → `./src/*`
+- Path alias `#/*` → `./src/*`
