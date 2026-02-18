@@ -11,18 +11,17 @@
 - **Build Tool**: Vite 7
 - **Language**: TypeScript (strict mode)
 - **Linting/Formatting**: Biome
+- **Env Validation**: envalid
 - **Package Manager**: Bun
 
 ## Commands
 
 ```bash
 bun run dev          # Start dev server on port 3000
-bun run build        # Build for production
-bun run test         # Run tests (vitest)
+bun run build        # Build for production (includes db:generate)
 bun run check        # Biome lint + format check
 bun run db:migrate   # Run Prisma migrations
 bun run db:generate  # Generate Prisma client
-bun run db:seed      # Seed sample data
 ```
 
 ## Code Style
@@ -39,7 +38,8 @@ bun run db:seed      # Seed sample data
 - **Routes** (`src/routes/`): File-based routing, each route file exports a `Route` constant
 - **Components** (`src/components/`): Shared React components
 - **Database** (`src/db.ts`): Prisma client singleton, schema in `prisma/schema.prisma`
-- **Path alias**: `@/*` maps to `./src/*`
+- **Environment** (`src/env.ts`): Validated env vars via envalid
+- **Path alias**: `#/*` maps to `./src/*`
 
 ## After Cloning
 
@@ -54,5 +54,4 @@ bun run db:migrate   # runs migrations against the database
 ## After Making Changes
 
 1. Run `bun run check` to verify linting and formatting
-2. Run `bun run test` if tests exist for the modified area
-3. If schema changed: `bun run db:generate` then `bun run db:migrate`
+2. If schema changed: `bun run db:generate` then `bun run db:migrate`

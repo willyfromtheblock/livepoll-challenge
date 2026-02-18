@@ -63,13 +63,7 @@ bun run db:generate
 bun run db:migrate
 ```
 
-5. **Optionally seed sample data:**
-
-```bash
-bun run db:seed
-```
-
-6. **Start the development server:**
+5. **Start the development server:**
 
 ```bash
 bun run dev
@@ -91,10 +85,10 @@ src/
     poll.$pollId.results.tsx  Results page
   components/      Shared React components
     Header.tsx     App header/navigation
+  env.ts           Validated environment variables (envalid)
   db.ts            Prisma client singleton
 prisma/
   schema.prisma    Database schema
-  seed.ts          Sample data seeder
 ```
 
 ## Architecture Decisions
@@ -126,11 +120,9 @@ Vote has unique constraint on (pollId, voterToken)
 | --------------------- | ---------------------------- |
 | `bun run dev`         | Start dev server (port 3000) |
 | `bun run build`       | Production build             |
-| `bun run test`        | Run tests                    |
 | `bun run check`       | Lint + format check (Biome)  |
 | `bun run db:migrate`  | Run Prisma migrations        |
 | `bun run db:generate` | Generate Prisma client       |
-| `bun run db:seed`     | Seed sample data             |
 | `bun run db:studio`   | Open Prisma Studio           |
 
 ## Trade-offs & Future Improvements
