@@ -58,7 +58,7 @@ function CreatePollPage() {
 			const result = await createPoll({
 				data: { question: trimmedQuestion, options: trimmedOptions },
 			});
-			navigate({ to: "/poll/$pollId", params: { pollId: result.id } });
+			await navigate({ to: "/poll/$pollId", params: { pollId: result.id } });
 		} catch (err) {
 			console.error("Failed to create poll:", err);
 			setError("Failed to create poll. Please try again.");
