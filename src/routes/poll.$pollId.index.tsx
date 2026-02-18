@@ -1,6 +1,7 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { BarChart3, CheckCircle2, Share2 } from "lucide-react";
+import type { SubmitEvent } from "react";
 import { useEffect, useState } from "react";
 import { castVote, getPoll } from "../server/polls";
 
@@ -62,7 +63,7 @@ function VotePage() {
 		);
 	}
 
-	async function handleVote(e: React.FormEvent) {
+	async function handleVote(e: SubmitEvent<HTMLFormElement>) {
 		e.preventDefault();
 		if (!selectedOption) return;
 		setError(null);
