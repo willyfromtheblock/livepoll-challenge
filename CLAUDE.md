@@ -41,6 +41,16 @@ bun run db:seed      # Seed sample data
 - **Database** (`src/db.ts`): Prisma client singleton, schema in `prisma/schema.prisma`
 - **Path alias**: `@/*` maps to `./src/*`
 
+## After Cloning
+
+`src/generated/` is gitignored. After a fresh clone, run:
+
+```bash
+bun install
+bun run db:generate  # generates Prisma client (required before build)
+bun run db:migrate   # runs migrations against the database
+```
+
 ## After Making Changes
 
 1. Run `bun run check` to verify linting and formatting

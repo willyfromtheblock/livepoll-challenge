@@ -12,17 +12,18 @@ A live voting/poll application where users can create polls, share them via uniq
 
 ## Tech Stack
 
-| Layer          | Technology                                    |
-| -------------- | --------------------------------------------- |
-| Framework      | TanStack Start (React, SSR)                   |
-| Router         | TanStack Router (file-based)                  |
-| Data Fetching  | TanStack React Query                          |
-| Database       | PostgreSQL + Prisma ORM                       |
-| Styling        | Tailwind CSS v4                               |
-| Charts         | Recharts                                      |
-| Build Tool     | Vite 7                                        |
-| Language       | TypeScript (strict)                           |
-| Lint/Format    | Biome                                         |
+| Layer         | Technology                   |
+| ------------- | ---------------------------- |
+| Framework     | TanStack Start (React, SSR)  |
+| Router        | TanStack Router (file-based) |
+| Data Fetching | TanStack React Query         |
+| Database      | PostgreSQL + Prisma ORM      |
+| Styling       | Tailwind CSS v4              |
+| Charts        | Recharts                     |
+| Build Tool    | Vite 7                       |
+| Language      | TypeScript (strict)          |
+| Lint/Format   | Biome                        |
+| Package Mgr   | Bun                          |
 
 ## Getting Started
 
@@ -43,26 +44,32 @@ bun install
 
 2. **Configure the database:**
 
-Copy the example environment file and set your PostgreSQL connection string:
+Create a `.env` file from the example and set your PostgreSQL connection string:
 
 ```bash
-# Edit .env.local with your database credentials
-# DATABASE_URL="postgresql://user:password@localhost:5432/livepoll"
+cp .env.example .env
+# Edit .env with your actual database credentials
 ```
 
-3. **Run database migrations:**
+3. **Generate the Prisma client:**
+
+```bash
+bun run db:generate
+```
+
+4. **Run database migrations:**
 
 ```bash
 bun run db:migrate
 ```
 
-4. **Optionally seed sample data:**
+5. **Optionally seed sample data:**
 
 ```bash
 bun run db:seed
 ```
 
-5. **Start the development server:**
+6. **Start the development server:**
 
 ```bash
 bun run dev
@@ -115,20 +122,21 @@ Vote has unique constraint on (pollId, voterToken)
 
 ## Available Scripts
 
-| Command              | Description                    |
-| -------------------- | ------------------------------ |
-| `bun run dev`        | Start dev server (port 3000)   |
-| `bun run build`      | Production build               |
-| `bun run test`       | Run tests                      |
-| `bun run check`      | Lint + format check (Biome)    |
-| `bun run db:migrate` | Run Prisma migrations          |
-| `bun run db:generate`| Generate Prisma client         |
-| `bun run db:seed`    | Seed sample data               |
-| `bun run db:studio`  | Open Prisma Studio             |
+| Command               | Description                  |
+| --------------------- | ---------------------------- |
+| `bun run dev`         | Start dev server (port 3000) |
+| `bun run build`       | Production build             |
+| `bun run test`        | Run tests                    |
+| `bun run check`       | Lint + format check (Biome)  |
+| `bun run db:migrate`  | Run Prisma migrations        |
+| `bun run db:generate` | Generate Prisma client       |
+| `bun run db:seed`     | Seed sample data             |
+| `bun run db:studio`   | Open Prisma Studio           |
 
 ## Trade-offs & Future Improvements
 
 **What was prioritized:**
+
 - Clean, working MVP with all core features
 - Type-safe server/client communication
 - Live-updating results
@@ -136,6 +144,7 @@ Vote has unique constraint on (pollId, voterToken)
 - Duplicate vote prevention
 
 **What could be added with more time:**
+
 - WebSocket/SSE for true real-time updates (instead of polling)
 - User authentication for managing created polls
 - Poll closing/expiration
