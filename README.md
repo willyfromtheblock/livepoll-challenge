@@ -8,7 +8,7 @@ A live voting/poll application where users can create polls, share them via uniq
 - **Share polls** via unique links
 - **Vote** on polls (one vote per browser)
 - **Live results** with auto-updating charts (2-second polling via React Query)
-- **Visual results** displayed with Recharts bar charts and progress bars
+- **Visual results** displayed with Recharts progress bars
 
 ## Tech Stack
 
