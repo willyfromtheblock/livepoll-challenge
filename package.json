@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "bun db:generate && vite build",
+    "start": "node .output/server/index.mjs",
     "preview": "vite preview",
     "format": "biome format",
     "lint": "biome lint",
@@ -21,6 +22,7 @@
     "@prisma/adapter-pg": "^7.4.0",
     "@prisma/client": "^7.2.0",
     "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/nitro-v2-vite-plugin": "^1.154.7",
     "@tanstack/react-devtools": "^0.7.0",
     "@tanstack/react-query": "^5.66.5",
     "@tanstack/react-query-devtools": "^5.84.2",
