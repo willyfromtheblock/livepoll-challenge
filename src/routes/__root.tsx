@@ -3,9 +3,11 @@ import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
+	Link,
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { Suspense } from "react";
 import Header from "../components/Header";
 
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
@@ -17,6 +19,7 @@ interface MyRouterContext {
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+	notFoundComponent: NotFound,
 	head: () => ({
 		meta: [
 			{
@@ -54,7 +57,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body>
 				<TanStackQueryProvider>
 					<Header />
-					{children}
+					<Suspense
+						fallback={
+							<div className="min-h-screen bg-linear-to-b from-slate-900 via-slate-800 to-slate-900" />
+						}
+					>
+						{children}
+					</Suspense>
 					<TanStackDevtools
 						config={{
 							position: "bottom-right",
@@ -71,5 +80,22 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<Scripts />
 			</body>
 		</html>
+	);
+}
+
+function NotFound() {
+	return (
+		<div className="min-h-screen bg-linear-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+			<div className="text-center">
+				<h1 className="text-6xl font-bold text-white mb-4">404</h1>
+				<p className="text-gray-400 mb-6">This page doesn't exist.</p>
+				<Link
+					to="/"
+					className="text-cyan-400 hover:text-cyan-300 transition-colors"
+				>
+					Back to home
+				</Link>
+			</div>
+		</div>
 	);
 }
