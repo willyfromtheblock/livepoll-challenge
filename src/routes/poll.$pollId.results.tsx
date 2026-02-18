@@ -95,7 +95,7 @@ function ResultsPage() {
 						</div>
 					</div>
 
-					{results.totalVotes > 0 && (
+					{results.totalVotes > 0 && mounted && (
 						<div className="mb-8 h-64">
 							<ResponsiveContainer width="100%" height="100%">
 								<BarChart
